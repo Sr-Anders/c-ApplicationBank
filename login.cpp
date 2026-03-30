@@ -1,43 +1,35 @@
 #include <iostream>
 #include <string>
-int clave_usuario = 1;
-int intento_clave;
-int opcionMenu = 1;
-int opcionMenuSaldo;
-int opcionMenuTransf;
-int opcionMenuServicio;
-int opcionMenuServicioIf;
-int tipoDeCuenta;
-float monto;
-float cuentaCorriente = 5000;
-float cuentaAhorro = 1000;
-float tasa = 480;
-float factLuz = 100;
-float pagFactLuz;
-float factAgua = 200;
-float pagFactAgua;
-float factInternet = 300;
-float pagFactInternet;
-std::string nombre_usuario = "u";
-std::string intento_nombre_usuario;
+bool verifInicioSesion(std::string usuarioCorrecto, int claveCorrecta);
 float conversion(float saldo, float tasa);
 void transfer(float a,float b, float &cuentaDescuento, float &cuentaAumento, float monto) {
     cuentaDescuento = a - monto;
     cuentaAumento = b + monto;
 }
 int main() {
+    std::string usuarioCorrecto = "u";
+    int claveCorrecta = 1;
+    int intentoClave;
+    std::string intentoUsuario;
+    int opcionMenu = 1;
+    int opcionMenuSaldo;
+    int opcionMenuTransf;
+    int opcionMenuServicio;
+    int opcionMenuServicioIf;
+    int tipoDeCuenta;
+    float monto;
+    float cuentaCorriente = 5000;
+    float cuentaAhorro = 1000;
+    float tasa = 480;
+    float factLuz = 100;
+    float pagFactLuz;
+    float factAgua = 200;
+    float pagFactAgua;
+    float factInternet = 300;
+    float pagFactInternet;
     float cuentaD;
     float cuentaA;
-    for (int cont_intentos = 0; cont_intentos < 3; cont_intentos++) {
-        std::cout << "**INICIO DE SESION**" << std::endl;
-        std::cout << std::endl;
-        std::cout << "Introduzca su nombre de usuario: ";
-        std::cin >> intento_nombre_usuario;
-        std::cout << std::endl;
-        std::cout << "Introduzca su clave: ";
-        std::cin >> intento_clave;
-        std::cout << std::endl;
-        if (intento_nombre_usuario == nombre_usuario && intento_clave == clave_usuario) {
+        if (verifInicioSesion(usuarioCorrecto, claveCorrecta)) {
             while(opcionMenu != 0) {
                 std::cout <<"**MENU PRINCIPAL**" << std::endl;
                 std::cout << std::endl;
@@ -188,6 +180,8 @@ int main() {
                                 } else if (tipoDeCuenta == 2) {
                                     cuentaAhorro = cuentaAhorro - pagFactLuz;
                                     factLuz = factLuz - pagFactLuz;
+                                    std::cout << "**OPERACION EXITOSA**" <<std::endl;
+                                    std::cout << std::endl;
                                     std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactLuz << " desde su cuenta de ahorro" << std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factLuz << std::endl;
@@ -216,7 +210,7 @@ int main() {
                                 if (tipoDeCuenta == 1) {
                                     cuentaCorriente = cuentaCorriente - pagFactAgua;
                                     factAgua = factAgua - pagFactAgua;
-                                    std::cout << "*OPERACION EXITOSA*" <<std::endl;
+                                    std::cout << "**OPERACION EXITOSA**" <<std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactAgua << " desde su cuenta corriente" << std::endl;
                                     std::cout << std::endl;
@@ -227,12 +221,10 @@ int main() {
                                 } else if (tipoDeCuenta == 2) {
                                     cuentaAhorro = cuentaAhorro - pagFactAgua;
                                     factAgua = factAgua - pagFactAgua;
-                                    std::cout << "*OPERACION EXITOSA*" <<std::endl;
+                                    std::cout << "**OPERACION EXITOSA**" <<std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactAgua << " desde su cuenta de ahorro" << std::endl;
-                                    std::cout << std::endl;
                                     std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factAgua << std::endl;
-                                    std::cout << std::endl;
                                     std::cout << "*El saldo actual de su cuenta de ahorro posterior al pago del servicio es de: BS " << cuentaAhorro << std::endl;
                                 }
                                 std::cout << std::endl;
@@ -258,7 +250,7 @@ int main() {
                                 if (tipoDeCuenta == 1) {
                                     cuentaCorriente = cuentaCorriente - pagFactInternet;
                                     factInternet = factInternet - pagFactInternet;
-                                    std::cout << "*OPERACION EXITOSA*" <<std::endl;
+                                    std::cout << "**OPERACION EXITOSA**" <<std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactInternet << " desde su cuenta corriente" << std::endl;
                                     std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factInternet << std::endl;
@@ -266,7 +258,7 @@ int main() {
                                 } else if (tipoDeCuenta == 2) {
                                     cuentaAhorro = cuentaAhorro - pagFactInternet;
                                     factInternet = factInternet - pagFactInternet;
-                                    std::cout << "*OPERACION EXITOSA*" <<std::endl;
+                                    std::cout << "**OPERACION EXITOSA**" <<std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*El pago fue realizado exitosamente por un monto de " << pagFactInternet << " desde su cuenta de ahorro" << std::endl;
                                     std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factInternet << std::endl;
@@ -280,15 +272,30 @@ int main() {
                         break;
                     default:   
                         break;
-            }    
+                }    
+            }               
         }
-            break;
-        } else {
-            std::cout << "Su usuario o clave son incorrectos, Intentos restantes: " << (2 - cont_intentos) << std::endl;
-            std::cout << std::endl;
+return 0;
+}
+bool verifInicioSesion(std::string usuarioCorrecto, int claveCorrecta){
+    std::string intentoUsuario;
+    int intentoClave;
+    for (int i = 0; i < 3; i++) {
+        std::cout << "**INICIO DE SESION**" << std::endl;
+        std::cout << std::endl;
+        std::cout << "Introduzca su nombre de usuario: ";
+        std::cin >> intentoUsuario;
+        std::cout << std::endl;
+        std::cout << "Introduzca su clave: ";
+        std::cin >> intentoClave;
+        std::cout << std::endl;
+        if ( intentoUsuario == usuarioCorrecto && intentoClave == claveCorrecta){
+            return true;
         }
+    std::cout << "Su usuario o clave son incorrectos, Intentos restantes: " << (2 - i) << std::endl;
+    std::cout << std::endl;
     }
-    return 0;
+    return false;
 }
 float conversion(float saldo, float tasa){
     if (tasa == 0){

@@ -7,8 +7,8 @@ void transfer(float a,float b, float &cuentaDescuento, float &cuentaAumento, flo
     cuentaAumento = b + monto;
 }
 int main() {
-    std::string usuarioCorrecto = "u";
-    int claveCorrecta = 1;
+    std::string usuarioCorrecto = "usuario";
+    int claveCorrecta = 123456;
     int intentoClave;
     std::string intentoUsuario;
     int opcionMenu = 1;
@@ -21,8 +21,8 @@ int main() {
     float cuentaCorriente = 5000;
     float cuentaAhorro = 1000;
     float tasa = 480;
-    float factLuz = 100;
-    float pagFactLuz;
+    float factElec = 100;
+    float pagFactElec;
     float factAgua = 200;
     float pagFactAgua;
     float factInternet = 300;
@@ -143,7 +143,7 @@ int main() {
                         while (opcionMenuServicio != 0) {
                             std::cout << "**PAGOS DE SERVICIOS**" << std::endl;
                             std::cout << std::endl;
-                            std::cout << "#1 Luz" << std::endl;
+                            std::cout << "#1 Electricidad" << std::endl;
                             std::cout << "#2 Agua" << std::endl;
                             std::cout << "#3 Internet" << std::endl;
                             std::cout << "#0 Salir al menu principal" << std::endl; 
@@ -152,9 +152,9 @@ int main() {
                             std::cin >> opcionMenuServicio;
                             std::cout << std::endl;
                             if (opcionMenuServicio == 1) {
-                                std::cout << "**LUZ**" << std::endl;
+                                std::cout << "**ELECTRICIDAD**" << std::endl;
                                 std::cout << std::endl;
-                                std::cout << "Su factura para el mes de marzo es de: BS " << factLuz << std::endl;
+                                std::cout << "Su factura para el mes de marzo es de: BS " << factElec << std::endl;
                                 std::cout << std::endl;
                                 std::cout << "**TIPO DE CUENTA** " << std::endl;
                                 std::cout << std::endl;
@@ -165,26 +165,26 @@ int main() {
                                 std::cin >> tipoDeCuenta;
                                 std::cout << std::endl;
                                 std::cout << "INGRESE MONTO: ";
-                                std::cin >> pagFactLuz;
+                                std::cin >> pagFactElec;
                                 std::cout << std::endl;
                                 if (tipoDeCuenta == 1) {
-                                    cuentaCorriente = cuentaCorriente - pagFactLuz;
-                                    factLuz = factLuz - pagFactLuz;
+                                    cuentaCorriente = cuentaCorriente - pagFactElec;
+                                    factElec = factElec - pagFactElec;
                                     std::cout << "*OPERACION EXITOSA*" <<std::endl;
                                     std::cout << std::endl;
-                                    std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactLuz << " desde su cuenta corriente" << std::endl;
+                                    std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactElec << " desde su cuenta corriente" << std::endl;
                                     std::cout << std::endl;
-                                    std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factLuz << std::endl;
+                                    std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factElec << std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*El saldo actual de su cuenta corriente posterior al pago del servicio es de: BS " << cuentaCorriente << std::endl;
                                 } else if (tipoDeCuenta == 2) {
-                                    cuentaAhorro = cuentaAhorro - pagFactLuz;
-                                    factLuz = factLuz - pagFactLuz;
+                                    cuentaAhorro = cuentaAhorro - pagFactElec;
+                                    factElec = factElec - pagFactElec;
                                     std::cout << "**OPERACION EXITOSA**" <<std::endl;
                                     std::cout << std::endl;
-                                    std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactLuz << " desde su cuenta de ahorro" << std::endl;
+                                    std::cout << "*El pago fue realizado exitosamente por un monto de: BS " << pagFactElec << " desde su cuenta de ahorro" << std::endl;
                                     std::cout << std::endl;
-                                    std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factLuz << std::endl;
+                                    std::cout << "*La deuda pendiente con respecto al servicio es de: BS " << factElec << std::endl;
                                     std::cout << std::endl;
                                     std::cout << "*El saldo actual de su cuenta de ahorro posterior al pago del servicio es de: BS " << cuentaAhorro << std::endl;
                                 }
